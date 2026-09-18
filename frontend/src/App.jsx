@@ -87,20 +87,6 @@ function App() {
                 VIEW WORK
               </a>
             </div>
-            <div className="flex gap-6 text-gray-400">
-              <a href="https://github.com/mfd-7" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
-                <FaGithub size={24} />
-              </a>
-              <a href="https://www.linkedin.com/in/muhtasim-fuad-093a8b274/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
-                <FaLinkedin size={24} />
-              </a>
-              <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
-                <FaInstagram size={24} />
-              </a>
-              <a href="https://facebook.com/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
-                <FaFacebook size={24} />
-              </a>
-            </div>
           </motion.div>
 
           <motion.div 
@@ -139,6 +125,7 @@ function App() {
                 <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                   <div className="flex items-center justify-center w-5 h-5 rounded-full border border-[#00F3FF] bg-[#00F3FF]/20 group-[.is-active]:bg-[#00F3FF] text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
                   <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass p-6 rounded-lg ml-4 md:ml-0">
+                    <h4 className="font-bold text-[#00F3FF]">Bachelor of Science, CSE</h4>
                     <h4 className="font-bold text-[#00F3FF]">B.Sc in Computer Science and Engineering</h4>
                     <p className="text-sm text-gray-400 mb-2">BRAC UNIVERSITY (On Going)</p>
                   </div>
@@ -313,8 +300,27 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center border-t border-white/5 text-gray-500 text-sm">
-        <p>© {new Date().getFullYear()} MD. MUHTASIM FUAD. Built with React & Django.</p>
+      <footer className="py-12 bg-black/80 text-center border-t border-white/5 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#00F3FF]/5 blur-[100px]"></div>
+        <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center">
+          <div className="flex gap-8 mb-8 text-gray-400">
+            <a href="https://github.com/mfd-7" target="_blank" rel="noreferrer" className="p-3 glass rounded-full hover:text-[#00F3FF] hover:border-[#00F3FF]/50 hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg">
+              <FaGithub size={24} />
+            </a>
+            <a href="https://www.linkedin.com/in/muhtasim-fuad-093a8b274/" target="_blank" rel="noreferrer" className="p-3 glass rounded-full hover:text-[#00F3FF] hover:border-[#00F3FF]/50 hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg">
+              <FaLinkedin size={24} />
+            </a>
+            <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="p-3 glass rounded-full hover:text-[#00F3FF] hover:border-[#00F3FF]/50 hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg">
+              <FaInstagram size={24} />
+            </a>
+            <a href="https://facebook.com/" target="_blank" rel="noreferrer" className="p-3 glass rounded-full hover:text-[#00F3FF] hover:border-[#00F3FF]/50 hover:scale-110 hover:-translate-y-1 transition-all duration-300 shadow-lg">
+              <FaFacebook size={24} />
+            </a>
+          </div>
+          <p className="text-gray-500 text-sm tracking-widest font-['Rajdhani']">
+            © {new Date().getFullYear()} MD. MUHTASIM FUAD. ALL RIGHTS RESERVED.
+          </p>
+        </div>
       </footer>
     </div>
   );
