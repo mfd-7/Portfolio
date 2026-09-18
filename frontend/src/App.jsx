@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Mail, User, Star, Menu, X, Terminal, Shield } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8000/api';
@@ -79,12 +79,26 @@ function App() {
             <p className="text-gray-400 text-lg md:text-xl mb-8 max-w-lg leading-relaxed border-l-2 border-[#00F3FF] pl-4">
               Transforming ideas into secure digital experiences. Full-Stack Developer specializing in Python, React, and Application Security.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mb-8">
               <a href="#contact" className="px-8 py-3 bg-[#00F3FF]/10 border border-[#00F3FF] text-[#00F3FF] font-bold hover:bg-[#00F3FF] hover:text-black transition-all rounded">
                 HIRE ME
               </a>
               <a href="#projects" className="px-8 py-3 border border-white/20 hover:border-white transition-all rounded">
                 VIEW WORK
+              </a>
+            </div>
+            <div className="flex gap-6 text-gray-400">
+              <a href="https://github.com/mfd-7" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
+                <FaGithub size={24} />
+              </a>
+              <a href="https://www.linkedin.com/in/muhtasim-fuad-093a8b274/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
+                <FaLinkedin size={24} />
+              </a>
+              <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
+                <FaInstagram size={24} />
+              </a>
+              <a href="https://facebook.com/" target="_blank" rel="noreferrer" className="hover:text-[#00F3FF] hover:scale-110 transition-all">
+                <FaFacebook size={24} />
               </a>
             </div>
           </motion.div>
@@ -136,6 +150,15 @@ function App() {
                     <h4 className="font-bold text-[#00F3FF]">HSC</h4>
                     <p className="text-sm text-gray-400 mb-2">CANTONMENT COLLEGE, JASHORE</p>
                     <p className="text-xs text-gray-500">GPA: 5.00 (2022)</p>
+                  </div>
+                </div>
+
+                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                  <div className="flex items-center justify-center w-5 h-5 rounded-full border border-[#00F3FF] bg-[#00F3FF]/20 text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
+                  <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass p-6 rounded-lg ml-4 md:ml-0">
+                    <h4 className="font-bold text-[#00F3FF]">SSC</h4>
+                    <p className="text-sm text-gray-400 mb-2">BAF SHAHEEN COLLEGE, JASHORE</p>
+                    <p className="text-xs text-gray-500">GPA: 5.00 (2020)</p>
                   </div>
                 </div>
 
