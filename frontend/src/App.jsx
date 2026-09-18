@@ -139,7 +139,7 @@ function App() {
                 <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                   <div className="flex items-center justify-center w-5 h-5 rounded-full border border-[#00F3FF] bg-[#00F3FF]/20 group-[.is-active]:bg-[#00F3FF] text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
                   <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass p-6 rounded-lg ml-4 md:ml-0">
-                    <h4 className="font-bold text-[#00F3FF]">Bachelor of Science, CSE</h4>
+                    <h4 className="font-bold text-[#00F3FF]">B.Sc in Computer Science and Engineering</h4>
                     <p className="text-sm text-gray-400 mb-2">BRAC UNIVERSITY (On Going)</p>
                   </div>
                 </div>

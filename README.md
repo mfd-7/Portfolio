@@ -55,3 +55,4 @@ The application will be accessible at `http://localhost:5173`.
 
 - **Frontend:** The `frontend` directory is optimized for instant deployment on Vercel or Netlify.
 - **Backend:** The `backend` directory is production-ready for platforms such as Render, Railway, or AWS. Ensure you configure your environment variables (`CORS_ALLOWED_ORIGINS`, `EMAIL_HOST`, `DB_URL`) appropriately.
+
