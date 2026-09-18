@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #00F3FF;
+  --color-bg-dark: #0a0a0a;
+}
+
+body {
+  background-color: var(--color-bg-dark);
+  color: #ffffff;
+  font-family: 'Rajdhani', 'Orbitron', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glitch-text {
+  text-shadow: 0 0 5px rgba(0, 243, 255, 0.5),
+               0 0 10px rgba(0, 243, 255, 0.3);
+}
