@@ -1,8 +1,11 @@
+import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Mail, User, Star, Menu, X, Terminal, Shield } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
+import axios from 'axios';
 
+const API_URL = 'http://localhost:8000/api';
 const INITIAL_PROJECTS = [
   {
     id: 1,
@@ -21,16 +24,24 @@ const INITIAL_PROJECTS = [
 ];
 
 function App() {
+  const [projects, setProjects] = useState([]);
   const [projects] = useState(INITIAL_PROJECTS);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [feedback, setFeedback] = useState({ name: '', email: '', rating: 5, message: '' });
   const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    axios.get(`${API_URL}/projects/`)
+      .then(res => setProjects(res.data))
+      .catch(err => console.error("Error fetching projects:", err));
+  }, []);
 
   const handleFeedbackSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
 
     try {
+      await axios.post(`${API_URL}/feedback/`, feedback);
       // Using Web3Forms for direct, free email delivery to muhtasimfuad3570@gmail.com without separate backend
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -60,6 +71,11 @@ function App() {
     } catch {
       window.location.href = `mailto:muhtasimfuad3570@gmail.com?subject=Collab Request from ${feedback.name}&body=Rating: ${feedback.rating}/5%0D%0A%0D%0A${feedback.message}`;
       setStatus('success');
+      setFeedback({ name: '', email: '', rating: 5, message: '' });
+      setTimeout(() => setStatus(null), 3000);
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
     }
   };
 
@@ -156,6 +172,7 @@ function App() {
                 <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                   <div className="flex items-center justify-center w-5 h-5 rounded-full border border-[#00F3FF] bg-[#00F3FF]/20 group-[.is-active]:bg-[#00F3FF] text-slate-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2"></div>
                   <div className="w-[calc(100%-2rem)] md:w-[calc(50%-1.5rem)] glass p-6 rounded-lg ml-4 md:ml-0">
+                    <h4 className="font-bold text-[#00F3FF]">Bachelor of Science, CSE</h4>
                     <h4 className="font-bold text-[#00F3FF]">B.Sc in Computer Science and Engineering</h4>
                     <p className="text-sm text-gray-400 mb-2">BRAC UNIVERSITY (On Going)</p>
                   </div>
@@ -213,6 +230,7 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
+            {projects.length > 0 ? projects.map((project, idx) => (
             {projects.map((project, idx) => (
               <motion.div 
                 key={project.id}
@@ -248,6 +266,9 @@ function App() {
                   </div>
                 </div>
               </motion.div>
+            )) : (
+              <div className="col-span-2 text-center text-gray-500 py-20">Loading project archives...</div>
+            )}
             ))}
           </div>
         </div>
@@ -264,10 +285,12 @@ function App() {
           <form onSubmit={handleFeedbackSubmit} className="glass p-8 md:p-12 rounded-2xl">
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               <div>
+                <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">IDENTITY (NAME)</label>
                 <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">YOUR NAME</label>
                 <input 
                   type="text" 
                   required
+                  className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors"
                   placeholder="e.g. John Doe"
                   className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors placeholder:text-gray-600"
                   value={feedback.name}
@@ -275,10 +298,12 @@ function App() {
                 />
               </div>
               <div>
+                <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">COMMLINK (EMAIL)</label>
                 <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">EMAIL ADDRESS</label>
                 <input 
                   type="email" 
                   required
+                  className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors"
                   placeholder="john@example.com"
                   className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors placeholder:text-gray-600"
                   value={feedback.email}
@@ -288,6 +313,7 @@ function App() {
             </div>
 
             <div className="mb-6">
+              <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">SYSTEM RATING</label>
               <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">RATING / EXPERIENCE</label>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -307,10 +333,12 @@ function App() {
             </div>
 
             <div className="mb-8">
+              <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">TRANSMISSION (MESSAGE)</label>
               <label className="block text-xs font-bold text-gray-400 mb-2 tracking-wider">YOUR MESSAGE</label>
               <textarea 
                 required
                 rows="4"
+                className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors resize-none"
                 placeholder="Let's collaborate on a project..."
                 className="w-full bg-black/50 border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#00F3FF] transition-colors resize-none placeholder:text-gray-600"
                 value={feedback.message}
@@ -321,8 +349,10 @@ function App() {
             <button 
               type="submit" 
               disabled={status === 'submitting'}
+              className="w-full bg-[#00F3FF]/10 border border-[#00F3FF] text-[#00F3FF] font-bold py-4 rounded-lg hover:bg-[#00F3FF] hover:text-black transition-all flex justify-center items-center gap-2"
               className="w-full bg-[#00F3FF]/10 border border-[#00F3FF] text-[#00F3FF] font-bold py-4 rounded-lg hover:bg-[#00F3FF] hover:text-black transition-all flex justify-center items-center gap-2 cursor-pointer"
             >
+              {status === 'submitting' ? 'TRANSMITTING...' : status === 'success' ? 'TRANSMISSION SENT!' : 'SEND TRANSMISSION'}
               {status === 'submitting' ? 'TRANSMITTING...' : status === 'success' ? 'TRANSMISSION SENT SUCCESSFULLY!' : 'SEND TRANSMISSION'}
               <Mail size={18} />
             </button>
