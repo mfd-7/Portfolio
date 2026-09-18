@@ -22,8 +22,12 @@ const DEFAULT_PROJECTS = [
 
 function App() {
   const [projects, setProjects] = useState(() => {
-    const saved = localStorage.getItem('mfd_portfolio_projects');
-    return saved ? JSON.parse(saved) : DEFAULT_PROJECTS;
+    try {
+      const saved = localStorage.getItem('mfd_portfolio_projects');
+      return saved ? JSON.parse(saved) : DEFAULT_PROJECTS;
+    } catch {
+      return DEFAULT_PROJECTS;
+    }
   });
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,7 +37,11 @@ function App() {
   // Admin Panel States
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return sessionStorage.getItem('mfd_admin_auth') === 'true';
+    try {
+      return sessionStorage.getItem('mfd_admin_auth') === 'true';
+    } catch {
+      return false;
+    }
   });
   const [adminUsername, setAdminUsername] = useState('');
   const [adminPassword, setAdminPassword] = useState('');
@@ -50,14 +58,22 @@ function App() {
 
   // Save projects to localStorage whenever updated
   useEffect(() => {
-    localStorage.setItem('mfd_portfolio_projects', JSON.stringify(projects));
+    try {
+      localStorage.setItem('mfd_portfolio_projects', JSON.stringify(projects));
+    } catch {
+      // Ignore if localStorage is restricted
+    }
   }, [projects]);
 
   const handleAdminLogin = (e) => {
     e.preventDefault();
     if (adminUsername === 'mfd7' && adminPassword === 'probro@3570') {
       setIsAuthenticated(true);
-      sessionStorage.setItem('mfd_admin_auth', 'true');
+      try {
+        sessionStorage.setItem('mfd_admin_auth', 'true');
+      } catch {
+        // Fallback
+      }
       setLoginError('');
     } else {
       setLoginError('Invalid Username or Password');
@@ -66,7 +82,11 @@ function App() {
 
   const handleAdminLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem('mfd_admin_auth');
+    try {
+      sessionStorage.removeItem('mfd_admin_auth');
+    } catch {
+      // Fallback
+    }
     setShowAdminModal(false);
   };
 
